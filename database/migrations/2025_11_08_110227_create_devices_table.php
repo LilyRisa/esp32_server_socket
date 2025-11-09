@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->text('mac')->unique();
+            $table->string('mac', 191)->unique();
             $table->text('code')->nullable();
             $table->text('last_ip')->nullable();
             $table->timestamps();
