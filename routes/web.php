@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DspController;
-use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
+
 
 
 Route::get('/', function () {
@@ -16,7 +16,7 @@ Route::post('/login', [UserController::class, 'fetch_login']);
 Route::post('/register', [UserController::class, 'register']);
 
 
-WebSocketsRouter::webSocket('/ws/dsp', \App\Http\Controllers\Socket\DeviceSocketHandler::class);
+
 
 
 Route::middleware(['auth'])->group(function () {
