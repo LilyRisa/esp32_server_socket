@@ -114,7 +114,7 @@ class DspController extends Controller
         $code = $req->device_code;
         $eq = $req->eq;
 
-        $ok = \App\Http\Controllers\Socket\DeviceSocketHandler::sendToDevice($code, [
+        $ok = \App\WebSockets\DeviceSocketHandler::sendToDevice($code, [
             'event' => 'dsp.update',
             'eq' => $eq,
             'code' => $code,

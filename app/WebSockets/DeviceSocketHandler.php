@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Socket;
+namespace App\WebSockets;
 
-use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use Ratchet\RFC6455\Messaging\MessageInterface;
+use Ratchet\WebSocket\MessageComponentInterface;
+
 
 class DeviceSocketHandler implements MessageComponentInterface
 {
@@ -14,11 +16,11 @@ class DeviceSocketHandler implements MessageComponentInterface
         echo "ESP32 connected (ID: {$conn->resourceId})\n";
         $conn->send(json_encode([
             'event' => 'connected',
-            'status'=> 'ok',
+            'status' => 'ok',
         ]));
     }
 
-    public function onMessage(ConnectionInterface $conn, $msg)
+    public function onMessage(ConnectionInterface $conn, MessageInterface $msg)
     {
         $data = json_decode($msg, true);
         if (!$data) {

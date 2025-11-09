@@ -5,6 +5,11 @@ use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DspController;
 
+use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
+use App\WebSockets\DeviceSocketHandler;
+
+
+WebSocketsRouter::webSocket('/ws/dsp', DeviceSocketHandler::class);
 
 
 Route::get('/', function () {
