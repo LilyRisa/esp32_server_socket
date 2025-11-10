@@ -23,10 +23,10 @@ return [
      */
     'apps' => [
         [
-            'id' => 'any',
-            'name' => 'Public Socket',
-            'key' => 'dsp',
-            'secret' => 'any',
+            'id' => env('PUSHER_APP_ID', 'laravel-websockets'),
+            'name' => 'Laravel WebSockets',
+            'key' => env('PUSHER_APP_KEY', 'dsp'),
+            'secret' => env('PUSHER_APP_SECRET', 'somesecret'),
             'enable_client_messages' => true,
             'enable_statistics' => true,
         ],
