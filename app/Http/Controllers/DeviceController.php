@@ -61,11 +61,16 @@ class DeviceController extends Controller
                 "Mật khẩu tạm thời: {$passwordPlain}\n\n" .
                 "Vui lòng đăng nhập và đổi mật khẩu sau khi sử dụng.";
         }
+        try{
+            Mail::raw($message, function ($m) use ($user, $subject) {
+                $m->to($user->email)->subject($subject);
+            });
 
-        Mail::raw($message, function ($m) use ($user, $subject) {
-            $m->to($user->email)->subject($subject);
-        });
+        }catch(\Exception $e){
 
+        }
+
+        
         return response()->json([
             'code' => $device->code,
             'user_email' => $user->email,
