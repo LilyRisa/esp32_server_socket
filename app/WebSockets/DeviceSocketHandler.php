@@ -14,7 +14,7 @@ class DeviceSocketHandler implements MessageComponentInterface
     public function __construct()
     {
         // Tạo kết nối Redis
-        $redis = new RedisClient('tcp://10.0.0.1:6379' . "?read_write_timeout=0");
+        $redis = new RedisClient('tcp://127.0.0.1:6379' . "?read_write_timeout=0");
 
         // Tạo 1 vòng lặp non-blocking để nghe Redis
         // (sử dụng timer tick của Ratchet)
