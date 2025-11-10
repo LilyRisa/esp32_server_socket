@@ -12,7 +12,8 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "predis/predis": "^3.2"
+        "predis/predis": "^3.2",
+        "textalk/websocket": "^1.6"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

@@ -7,7 +7,7 @@ use App\Models\DspPreset;
 use App\Models\Device;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Ratchet\Client\connect;
+use WebSocket\Client;
 
 use App\Events\DspUpdateEvent;
 
@@ -118,9 +118,12 @@ class DspController extends Controller
             'code'  => $code ?: 'broadcast', // có thể null → broadcast toàn bộ
             'eq'    => $eq,
         ];
-        $redis = new \Predis\Client('tcp://10.0.0.1:6379'."?read_write_timeout=0");
-        $redis->publish('ws:dsp', json_encode($payload));
-        // \App\WebSockets\DeviceSocketHandler::broadcast($payload);
+        $client = new Client("ws://127.0.0.1:6001/ws/dsp");
+        $client->send(json_encode($payload));
+        $client->close();
+        // $redis = new \Predis\Client('tcp://10.0.0.1:6379' . "?read_write_timeout=0");
+        // $redis->publish('ws:dsp', json_encode($payload));
+        // // \App\WebSockets\DeviceSocketHandler::broadcast($payload);
         return response()->json([
             'success' => true,
             'message' => 'Broadcasted DSP to all connected devices'
