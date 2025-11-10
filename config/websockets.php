@@ -25,7 +25,7 @@ return [
         [
             'id' => 'any',
             'name' => 'Public Socket',
-            'key' => 'any',
+            'key' => 'dsp',
             'secret' => 'any',
             'enable_client_messages' => true,
             'enable_statistics' => true,

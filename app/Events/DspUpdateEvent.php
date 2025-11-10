@@ -19,11 +19,13 @@ class DspUpdateEvent
      */
     public $code;
     public $eq;
+    public $event;
 
-    public function __construct($code, $eq)
+    public function __construct($event, $code, $eq)
     {
         $this->code = $code;
         $this->eq = $eq;
+        $this->event = $event;
     }
 
     /**
@@ -33,13 +35,13 @@ class DspUpdateEvent
      */
     public function broadcastOn(): array
     {
-        return new Channel('dsp-channel');
+        return new Channel('public-channel');
     }
     public function broadcastWith()
     {
         return [
             'code' => $this->code,
-            'event' => "dsp.update",
+            'event' => $this->event,
             'eq' => $this->eq,
         ];
     }

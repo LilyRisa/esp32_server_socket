@@ -118,9 +118,10 @@ class DspController extends Controller
             'code'  => $code ?: 'broadcast', // có thể null → broadcast toàn bộ
             'eq'    => $eq,
         ];
-        $client = new Client("ws://127.0.0.1:6001/ws/dsp");
-        $client->send(json_encode($payload));
-        $client->close();
+        // $client = new Client("ws://127.0.0.1:6001/ws/dsp");
+        // $client->send(json_encode($payload));
+        // $client->close();
+        event(new DspUpdateEvent("dsp.update", $code, $eq));
         // $redis = new \Predis\Client('tcp://10.0.0.1:6379' . "?read_write_timeout=0");
         // $redis->publish('ws:dsp', json_encode($payload));
         // // \App\WebSockets\DeviceSocketHandler::broadcast($payload);

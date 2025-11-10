@@ -11,28 +11,28 @@ class DeviceSocketHandler implements MessageComponentInterface
 {
     protected static array $connections = [];
 
-    public function __construct()
-    {
-        // Tạo kết nối Redis
-        $redis = new RedisClient('tcp://127.0.0.1:6379' . "?read_write_timeout=0");
+    // public function __construct()
+    // {
+    //     // Tạo kết nối Redis
+    //     $redis = new RedisClient('tcp://127.0.0.1:6379' . "?read_write_timeout=0");
 
-        // Tạo 1 vòng lặp non-blocking để nghe Redis
-        // (sử dụng timer tick của Ratchet)
-        $loop = \React\EventLoop\Loop::get();
-        $pubsub = $redis->pubSubLoop();
+    //     // Tạo 1 vòng lặp non-blocking để nghe Redis
+    //     // (sử dụng timer tick của Ratchet)
+    //     $loop = \React\EventLoop\Loop::get();
+    //     $pubsub = $redis->pubSubLoop();
 
-        $loop->addPeriodicTimer(0.5, function () use ($pubsub) {
-            foreach ($pubsub as $message) {
-                if ($message->kind === 'message') {
-                    $data = json_decode($message->payload, true);
-                    $this->broadcastToAll($data);
-                }
-            }
-        });
+    //     $loop->addPeriodicTimer(0.5, function () use ($pubsub) {
+    //         foreach ($pubsub as $message) {
+    //             if ($message->kind === 'message') {
+    //                 $data = json_decode($message->payload, true);
+    //                 $this->broadcastToAll($data);
+    //             }
+    //         }
+    //     });
 
-        // Subscribe kênh Redis
-        $pubsub->subscribe('ws:dsp');
-    }
+    //     // Subscribe kênh Redis
+    //     $pubsub->subscribe('ws:dsp');
+    // }
 
     public function onOpen($conn)
     {
