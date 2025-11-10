@@ -121,6 +121,8 @@ return [
 
     'redis' => [
 
+         'read_write_timeout' => -1,
+
         'client' => env('REDIS_CLIENT', 'phpredis'),
 
         'options' => [
