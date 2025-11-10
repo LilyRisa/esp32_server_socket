@@ -23,13 +23,11 @@ return [
      */
     'apps' => [
         [
-            'id' => env('PUSHER_APP_ID'),
-            'name' => env('APP_NAME'),
-            'key' => env('PUSHER_APP_KEY'),
-            'secret' => env('PUSHER_APP_SECRET'),
-            'path' => env('PUSHER_APP_PATH'),
-            'capacity' => null,
-            'enable_client_messages' => false,
+            'id' => 'any',
+            'name' => 'Public Socket',
+            'key' => 'any',
+            'secret' => 'any',
+            'enable_client_messages' => true,
             'enable_statistics' => true,
         ],
     ],
@@ -47,9 +45,8 @@ return [
      * This array contains the hosts of which you want to allow incoming requests.
      * Leave this empty if you want to accept requests from all hosts.
      */
-    'allowed_origins' => [
-        //
-    ],
+    'allowed_origins' => ["*"],
+    'skip_origin_check' => true,
 
     /*
      * The maximum request size in kilobytes that is allowed for an incoming WebSocket request.

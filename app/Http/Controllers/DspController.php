@@ -111,18 +111,19 @@ class DspController extends Controller
 
     public function streamDsp(Request $req)
     {
-        $code = $req->device_code;
-        $eq = $req->eq;
-
-        $ok = \App\WebSockets\DeviceSocketHandler::sendToDevice($code, [
+        $code = $req->input("device_code");
+        $eq = $req->input("eq_data");
+        $payload = [
             'event' => 'dsp.update',
-            'eq' => $eq,
-            'code' => $code,
-        ]);
-
+            'code'  => $code ?: 'broadcast', // có thể null → broadcast toàn bộ
+            'eq'    => $eq,
+        ];
+        $redis = new \Predis\Client();
+        $redis->publish('ws:dsp', json_encode($payload));
+        // \App\WebSockets\DeviceSocketHandler::broadcast($payload);
         return response()->json([
-            'success' => $ok,
-            'msg' => $ok ? 'DSP config sent to device' : 'Device not connected',
+            'success' => true,
+            'message' => 'Broadcasted DSP to all connected devices'
         ]);
     }
 }

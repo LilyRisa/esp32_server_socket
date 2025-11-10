@@ -5,62 +5,59 @@ namespace App\WebSockets;
 use Ratchet\ConnectionInterface;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use Ratchet\WebSocket\MessageComponentInterface;
-
+use Predis\Client as RedisClient;
 
 class DeviceSocketHandler implements MessageComponentInterface
 {
-    protected static array $devices = [];
+    protected static array $connections = [];
 
-    public function onOpen(ConnectionInterface $conn)
+    public function __construct()
     {
-        echo "ESP32 connected (ID: {$conn->resourceId})\n";
-        $conn->send(json_encode([
-            'event' => 'connected',
-            'status' => 'ok',
-        ]));
+        // Tạo kết nối Redis
+        $redis = new RedisClient();
+
+        // Tạo 1 vòng lặp non-blocking để nghe Redis
+        // (sử dụng timer tick của Ratchet)
+        $loop = \React\EventLoop\Loop::get();
+        $pubsub = $redis->pubSubLoop();
+
+        $loop->addPeriodicTimer(0.5, function () use ($pubsub) {
+            foreach ($pubsub as $message) {
+                if ($message->kind === 'message') {
+                    $data = json_decode($message->payload, true);
+                    $this->broadcastToAll($data);
+                }
+            }
+        });
+
+        // Subscribe kênh Redis
+        $pubsub->subscribe('ws:dsp');
     }
 
-    public function onMessage(ConnectionInterface $conn, MessageInterface $msg)
+    public function onOpen($conn)
     {
-        $data = json_decode($msg, true);
-        if (!$data) {
-            $conn->send(json_encode(['error' => 'invalid_json']));
-            return;
-        }
-
-        if (($data['event'] ?? '') === 'register') {
-            $code = $data['code'] ?? 'unknown';
-            $conn->device_code = $code;
-            self::$devices[$code] = $conn;
-            echo "Registered: {$code}\n";
-            $conn->send(json_encode(['event'=>'registered','code'=>$code]));
-            return;
-        }
-
-        $conn->send(json_encode(['ack'=>$data]));
+        self::$connections[$conn->resourceId] = $conn;
+        echo " Client connected: {$conn->resourceId}\n";
     }
 
-    public function onClose(ConnectionInterface $conn)
+    public function onClose($conn)
     {
-        $code = $conn->device_code ?? null;
-        if ($code && isset(self::$devices[$code])) {
-            unset(self::$devices[$code]);
-            echo "Disconnected: {$code}\n";
-        }
+        unset(self::$connections[$conn->resourceId]);
     }
-
     public function onError(ConnectionInterface $conn, \Exception $e)
     {
-        echo "Error: {$e->getMessage()}\n";
+        echo "⚠️ Error: {$e->getMessage()}\n";
         $conn->close();
     }
+    public function onMessage(ConnectionInterface $conn, MessageInterface $msg) {}
 
-    public static function sendToDevice(string $deviceCode, $data)
+    protected function broadcastToAll($data)
     {
-        if (!isset(self::$devices[$deviceCode])) return false;
-        $payload = is_string($data) ? $data : json_encode($data);
-        self::$devices[$deviceCode]->send($payload);
-        echo "Sent to {$deviceCode}: {$payload}\n";
-        return true;
+        $payload = json_encode($data);
+        foreach (self::$connections as $conn) {
+            if ($conn) {
+                $conn->send($payload);
+            }
+        }
     }
 }

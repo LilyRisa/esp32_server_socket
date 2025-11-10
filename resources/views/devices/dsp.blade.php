@@ -104,7 +104,7 @@
             <select id="deviceSelect">
                 <option value="">-- Chọn thiết bị --</option>
                 @foreach ($devices as $device)
-                <option value="{{ $device->id }}">{{ $device->code }}</option>
+                <option value="{{ $device->code }}">{{ $device->code }}</option>
                 @endforeach
             </select>
         </div>
@@ -154,6 +154,9 @@
 
     const eqData = window.eqChart.data.datasets[0].data;
 
+    console.log(deviceId);
+    
+
     fetch('/dsp/stream', {
         method: 'POST',
         headers: {
@@ -161,7 +164,7 @@
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
         },
         body: JSON.stringify({
-            device_id: deviceId,
+            device_code: deviceId,
             eq_data: eqData
         })
     })
