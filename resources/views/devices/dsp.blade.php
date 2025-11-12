@@ -358,7 +358,7 @@
 
         Swal.fire({
             title: "Bạn chắc chắn chứ?",
-            text: "Hành động này sẽ nạp trực tiếp cấu hình EQ vào firmware của thiết bị với điều khiện thiết bị đã cấu hình kết nối internet",
+            text: "Hành động này sẽ nạp trực tiếp và ghi đè cấu hình EQ vào firmware của thiết bị với điều khiện thiết bị đã cấu hình kết nối internet",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
