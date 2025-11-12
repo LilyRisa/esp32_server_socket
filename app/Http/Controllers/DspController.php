@@ -16,9 +16,9 @@ class DspController extends Controller
     public function save(Request $req)
     {
         $req->validate([
-            'device_id' => 'required|exists:devices,id',
+            'device_id' => 'required|max:100',
             'name' => 'required|string|max:100',
-            'eq_data' => 'required|array|size:10',
+            'eq_data' => 'required',
         ]);
 
         DB::beginTransaction();
@@ -39,7 +39,8 @@ class DspController extends Controller
             }
 
             // 2️⃣ Ghi link giữa device và preset
-            $device = Device::find($req->device_id);
+
+            $device = Device::where("code", $req->device_id)->first();
 
             // Xóa liên kết cũ (nếu có) và tạo mới
             $device->dspPreset()->detach($preset->id);
