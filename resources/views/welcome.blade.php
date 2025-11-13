@@ -117,7 +117,7 @@
                         Đăng nhập
                     </button> --}}
                     <button class="px-5 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full hover:shadow-lg hover:shadow-blue-300/50 transition-all transform hover:scale-105">
-                        <a href="/login">Tham gia ngay</a>
+                        <a href="/login" target="_blank">Tham gia ngay</a>
                     </button>
                 </div>
             </div>
