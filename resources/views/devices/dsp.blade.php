@@ -3,7 +3,7 @@
 @section('title', 'DSP Thiết bị')
 
 @section('content_header')
-<h1 class="text-danger font-weight-bold">🎚️ Điều chỉnh DSP Thiết bị</h1>
+<h1 class="text-danger font-weight-bold">🎚️ DSP Controller</h1>
 @stop
 
 @section('plugins.jquery', true)
@@ -378,7 +378,7 @@
                         eq_data: outputJSON()
                 }),
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                    success: res => alert(res.success ? 'Gửi cấu hình DSP thành công!' :  res.message),
+                    success: res => alert(res.success ? 'Gửi cấu hình EQ thành công!' :  res.message),
                     error: () => alert('⚠️ Lỗi kết nối máy chủ hoặc thiết bị!')
                 });
             }
