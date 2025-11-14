@@ -3,7 +3,7 @@
 @section('title', 'DSP Thiết bị')
 
 @section('content_header')
-<h1 class="text-danger font-weight-bold">🎚️ DSP Controller</h1>
+<h1 class="text-danger font-weight-bold">EQ Controller</h1>
 @stop
 
 @section('plugins.jquery', true)

@@ -331,7 +331,7 @@ return [
                 'icon' => 'fas fa-list',
             ],
             [
-                'text' => 'DSP Thiết bị',
+                'text' => 'SET EQ DEVICE',
                 'url'  => 'devices/dsp',
                 'icon' => 'fas fa-sliders-h',
             ],

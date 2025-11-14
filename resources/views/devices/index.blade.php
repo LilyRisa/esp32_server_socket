@@ -127,7 +127,7 @@
 
         <div class="device-info">
             <div class="device-code">{{ $device->code }}</div>
-            <a href="{{ route('devices.dsp') }}" class="btn btn-dsp">⚙ DSP</a>
+            <a href="{{ route('devices.dsp') }}" class="btn btn-dsp">⚙ EQ</a>
         </div>
     </div>
     @endforeach
