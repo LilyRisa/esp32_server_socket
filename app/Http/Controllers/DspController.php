@@ -8,6 +8,7 @@ use App\Models\Device;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use WebSocket\Client;
+use App\Models\DeviceEq;
 
 use App\Events\DspUpdateEvent;
 
@@ -119,6 +120,7 @@ class DspController extends Controller
             'code'  => $code ?: 'broadcast', // có thể null → broadcast toàn bộ
             'eq'    => $eq,
         ];
+        DeviceEq::updateOrCreate(['device_code' => $code],$eq);
         // $client = new Client("ws://127.0.0.1:6001/ws/dsp");
         // $client->send(json_encode($payload));
         // $client->close();
@@ -130,5 +132,37 @@ class DspController extends Controller
             'success' => true,
             'message' => 'Broadcasted DSP to all connected devices'
         ]);
+    }
+
+    public function fetch(Request $request)
+    {
+        $request->validate([
+            'device_code' => 'required|string',
+        ]);
+
+        $deviceCode = $request->input('device_code');
+
+        $record = DeviceEq::where('device_code', $deviceCode)->first();
+
+        if (! $record) {
+            // Nếu không có, trả cấu trúc rỗng (hoặc 404 tuỳ bạn)
+            return response()->json([
+                'code' => $deviceCode,
+                'eq' => null
+            ], 200);
+        }
+
+        // Trả về theo mẫu bạn muốn: code + eq object
+        return response()->json([
+            'code' => $record->device_code,
+            'eq' => [
+                'clarity' => $record->clarity,
+                'ambience' => $record->ambience,
+                'surround' => $record->surround,
+                'dynamic_boost' => $record->dynamic_boost,
+                'bass_boost' => $record->bass_boost,
+                'eq' => $record->eq ?? []
+            ]
+        ], 200);
     }
 }

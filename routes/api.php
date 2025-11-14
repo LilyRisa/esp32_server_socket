@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/create_code_device', [App\Http\Controllers\DeviceController::class, 'create']);
 Route::post('/update_device', [App\Http\Controllers\DeviceController::class, 'update']);
 Route::post('/check_code_device', [App\Http\Controllers\DeviceController::class, 'check']);
+Route::post('/device/dsp', [App\Http\Controllers\DspController::class, 'getdsp']);
