@@ -378,7 +378,7 @@
                         eq_data: outputJSON()
                 }),
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                    success: res => alert(res.success ? 'Gửi cấu hình EQ thành công!' :  res.message),
+                    // success: res => alert(res.success ? 'Gửi cấu hình EQ thành công!' :  res.message),
                     error: () => alert('⚠️ Lỗi kết nối máy chủ hoặc thiết bị!')
                 });
             }
