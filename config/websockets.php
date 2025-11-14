@@ -45,7 +45,7 @@ return [
      * This array contains the hosts of which you want to allow incoming requests.
      * Leave this empty if you want to accept requests from all hosts.
      */
-    'allowed_origins' => ["*"],
+    'allowed_origins' => [],
     'skip_origin_check' => true,
 
     /*
