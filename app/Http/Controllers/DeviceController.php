@@ -93,7 +93,7 @@ class DeviceController extends Controller
 
     public function check(Request $req)
     {
-        $code = $req->input('device_code');
+        $code = $req->input('code');
         $device = Device::where('code', $code)->first();
 
         if ($device) {
