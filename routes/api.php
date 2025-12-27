@@ -22,3 +22,11 @@ Route::post('/create_code_device', [App\Http\Controllers\DeviceController::class
 Route::post('/update_device', [App\Http\Controllers\DeviceController::class, 'update']);
 Route::post('/check_code_device', [App\Http\Controllers\DeviceController::class, 'check']);
 Route::post('/device/dsp', [App\Http\Controllers\DspController::class, 'fetch']);
+
+// user  
+Route::post('/user/login', [App\Http\Controllers\API\UserController::class, 'login']);
+Route::post('/user/register', [App\Http\Controllers\API\UserController::class, 'register']);
+
+Route::middleware(['auth:sanctum', 'token.version'])->group(function () {
+    Route::get('/me', [App\Http\Controllers\API\UserController::class, 'me']);
+});
