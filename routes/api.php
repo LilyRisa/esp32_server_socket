@@ -29,4 +29,5 @@ Route::post('/user/register', [App\Http\Controllers\API\UserController::class, '
 
 Route::middleware(['auth:sanctum', 'token.version'])->group(function () {
     Route::get('/me', [App\Http\Controllers\API\UserController::class, 'me']);
+    Route::get('/device/list', [App\Http\Controllers\API\DeviceController::class, 'list']);
 });
