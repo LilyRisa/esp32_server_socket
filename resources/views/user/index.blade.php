@@ -61,31 +61,10 @@
         </div>
 
         <div class="col-lg-4 col-md-5">
-            <div class="card glass-card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="font-weight-bold m-0"><i class="fa-solid fa-sliders text-success mr-2"></i>EQ Device</h5>
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="eqSwitch" checked>
-                            <label class="custom-control-label" for="eqSwitch"></label>
-                        </div>
+            <div class="card glass-card p-4">
+                <h5 class="font-weight-bold mb-4">Ứng dụng</h5>
+                <div class="app-grid" id="app-grid-container">
                     </div>
-
-                    <div class="d-flex justify-content-between align-items-end h-100">
-                        <div class="text-center">
-                            <div class="eq-slider-wrapper"><input type="range" min="0" max="100" value="70" orient="vertical"></div>
-                            <small class="font-weight-bold text-muted mt-2 d-block">BASS</small>
-                        </div>
-                        <div class="text-center">
-                            <div class="eq-slider-wrapper"><input type="range" min="0" max="100" value="40" orient="vertical"></div>
-                            <small class="font-weight-bold text-muted mt-2 d-block">MID</small>
-                        </div>
-                        <div class="text-center">
-                            <div class="eq-slider-wrapper"><input type="range" min="0" max="100" value="80" orient="vertical"></div>
-                            <small class="font-weight-bold text-muted mt-2 d-block">TREB</small>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
