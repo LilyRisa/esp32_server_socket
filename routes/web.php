@@ -27,7 +27,7 @@ Route::post('/register', [UserController::class, 'register']);
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('user.index');
     })->name('dashboard');
 
     Route::get('/profile', function () {
