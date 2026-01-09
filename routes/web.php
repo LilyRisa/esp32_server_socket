@@ -9,12 +9,19 @@ use BeyondCode\LaravelWebSockets\Facades\WebSocketsRouter;
 use App\WebSockets\DeviceSocketHandler;
 
 
-WebSocketsRouter::webSocket('/ws/dsp', DeviceSocketHandler::class);
-
-
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/{any}', function () {
+//     return view('spa'); // hoặc trả index.html
+// })->where('any', '.*');
+
+
+WebSocketsRouter::webSocket('/ws/dsp', DeviceSocketHandler::class);
+
+
+
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'fetch_login']);
@@ -30,12 +37,9 @@ Route::middleware(['auth'])->group(function () {
         return view('user.index');
     })->name('dashboard');
 
-    Route::get('/profile', function () {
-        return view('profile');
-    });
-
     // Route::get('/devices', [App\Http\Controllers\DeviceController::class, 'index']);
 
+     Route::get('/spa/account', [UserController::class, 'account'])->name('account');
      Route::get('account/change-password', [UserController::class, 'showChangePassword'])->name('account.password');
     Route::post('account/change-password', [UserController::class, 'updatePassword']);
 

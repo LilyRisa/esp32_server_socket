@@ -1,84 +1,574 @@
 body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #6DD5FA 0%, #2980B9 100%);
-            min-height: 100vh;
-            padding: 40px 0;
-            color: #1d1d1f;
-        }
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #6DD5FA 0%, #2980B9 100%);
+    min-height: 100vh;
+    padding: 40px 0;
+    color: #1d1d1f;
+}
 
-        /* Glassmorphism Card */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 28px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            height: 100%;
-            transition: transform 0.3s ease;
-        }
-        .glass-card:hover { transform: translateY(-5px); }
+/* Glassmorphism Card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    transition: transform 0.3s ease;
+}
 
-        /* User Info */
-        .avatar-box img { width: 85px; height: 85px; object-fit: cover; border: 2px solid white; }
-        
-        /* Device List */
-        .device-item {
-            background: rgba(255,255,255,0.4);
-            border-radius: 18px;
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            border: 1px solid transparent;
-        }
-        .device-item:hover { border: 1px solid #007AFF; background: rgba(255,255,255,0.6); }
+.glass-card:hover {
+    transform: translateY(-5px);
+}
 
-        /* Audio List */
-        .audio-item {
-            background: rgba(255,255,255,0.3);
-            border-radius: 12px;
-            margin-bottom: 8px;
-            padding: 10px 15px;
-            display: flex; align-items: center;
-        }
+/* User Info */
+.avatar-box img {
+    width: 85px;
+    height: 85px;
+    object-fit: cover;
+    border: 2px solid white;
+}
 
-        /* --- APP GRID (The replacement for EQ) --- */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 cột như hình */
-            gap: 15px;
-            padding: 10px;
-        }
-        .app-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            text-decoration: none !important;
-            transition: opacity 0.2s;
-        }
-        .app-item:hover { opacity: 0.7; }
-        .app-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 5px;
-            font-size: 24px;
-            color: white;
-        }
-        .app-name {
-            font-size: 11px;
-            font-weight: 500;
-            color: #333;
-            white-space: nowrap;
-        }
+/* Device List */
+.device-item {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 18px;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
 
-        /* Common Buttons */
-        .btn-apple {
-            background: #007AFF; color: white; border-radius: 15px; 
-            font-size: 13px; padding: 4px 15px; border: none;
-        }
+.device-item:hover {
+    border: 1px solid #007AFF;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* Audio List */
+.list-group-item-glass {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    margin-bottom: 8px;
+    border-radius: 12px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-audio {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    margin-right: 15px;
+}
+
+/* --- APP GRID (The replacement for EQ) --- */
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 cột như hình */
+    gap: 15px;
+    padding: 10px;
+}
+
+.app-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none !important;
+    transition: opacity 0.2s;
+}
+
+.app-item:hover {
+    opacity: 0.7;
+}
+
+.app-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: white;
+}
+
+.app-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: #333;
+    white-space: nowrap;
+}
+
+/* Common Buttons */
+.btn-apple {
+    background: #007AFF;
+    color: white;
+    border-radius: 15px;
+    font-size: 13px;
+    padding: 4px 15px;
+    border: none;
+}
+
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    /* Độ tối nhẹ cho nền */
+    backdrop-filter: blur(10px);
+    /* Hiệu ứng mờ đặc trưng iCloud */
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    display: none;
+    /* Mặc định ẩn */
+}
+
+/* Cửa sổ Loading nhỏ gọn */
+.loading-box {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px 50px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 250px;
+}
+
+/* Spinner phong cách Apple (mượt mà) */
+.apple-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 122, 255, 0.1);
+    border-top: 3px solid #007AFF;
+    /* Màu xanh Apple */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1d1d1f;
+    letter-spacing: -0.01em;
+}
+
+/* Custom Modal Style cho giống iCloud */
+.icloud-modal .modal-content {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.icloud-modal .modal-header {
+    border-bottom: none;
+    padding: 25px 30px 10px;
+}
+
+.icloud-modal .modal-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #1d1d1f;
+}
+
+.icloud-modal .modal-body {
+    padding: 10px 30px 30px;
+}
+
+/* Avatar Edit Section */
+.edit-avatar-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 25px;
+}
+
+.edit-avatar-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-change-photo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #007AFF;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Form Input Style */
+.icloud-input-group {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 14px;
+    padding: 8px 15px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.icloud-input-group:focus-within {
+    background: white;
+    border-color: #007AFF;
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+}
+
+.icloud-input-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #86868b;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+
+.icloud-input-group input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    color: #1d1d1f;
+    outline: none;
+    padding: 0;
+}
+
+/* Action Buttons */
+.btn-icloud-cancel {
+    background: transparent;
+    color: #007AFF;
+    font-weight: 500;
+    border: none;
+    padding: 10px 20px;
+}
+
+.btn-icloud-save {
+    background: #007AFF;
+    color: white;
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 8px 25px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.btn-icloud-save:disabled {
+    background: #D2D2D7;
+    box-shadow: none;
+}
+
+
+/* user edit */
+
+
+.bento-edit-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+
+.be-title {
+    color: white;
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+}
+
+/* Bento Grid Layout */
+.be-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 20px;
+}
+
+/* Card Style (Dựa trên glass-card cũ nhưng cải tiến) */
+.be-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 28px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Cấu trúc cụ thể các ô Bento */
+.be-profile-main {
+    grid-column: span 1;
+    grid-row: span 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.be-info {
+    grid-column: span 2;
+}
+
+.be-contact {
+    grid-column: span 2;
+}
+
+.be-security {
+    grid-column: span 1;
+}
+
+.be-device-info {
+    grid-column: span 1;
+}
+
+/* Avatar Edit */
+.be-avatar-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+}
+
+.be-avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.be-upload-badge {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #007AFF;
+    color: white;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 3px solid white;
+}
+
+/* Input Styles */
+.be-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1d1d1f;
+    margin-bottom: 20px;
+}
+
+.be-input-group {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    padding: 10px 18px;
+    margin-bottom: 12px;
+}
+
+.be-input-group label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #86868b;
+    margin-bottom: 0;
+}
+
+.be-input-group input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    color: #1d1d1f;
+    outline: none;
+}
+
+/* Icons & Buttons */
+.be-icon-box {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.be-btn-close {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.be-btn-close:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.be-action-bar {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    padding: 12px 30px;
+    border-radius: 24px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.be-btn-primary {
+    background: #007AFF;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 15px;
+    font-weight: 600;
+}
+
+.be-btn-secondary {
+    background: #E8E8ED;
+    color: #1d1d1f;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 15px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .be-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .be-profile-main {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+
+    .be-info,
+    .be-contact {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 576px) {
+    .be-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .be-profile-main,
+    .be-info,
+    .be-contact,
+    .be-security,
+    .be-device-info {
+        grid-column: span 1;
+    }
+}
+
+
+/* loading */
+.esp_loader_overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  z-index: 9999; /* Đảm bảo luôn nằm trên cùng */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  backdrop-filter: blur(4px); /* Thêm hiệu ứng mờ nền hiện đại */
+}
+
+.esp_spinner_wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.esp_spinner_dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  /* Tránh dùng biến global, dùng calc trực tiếp từ inline style truyền vào */
+  transform: rotate(calc(var(--i) * 30deg)) translateY(-35px);
+  animation: esp_dot_animation 1.2s infinite ease-in-out;
+  animation-delay: calc(var(--i) * 0.1s);
+  will-change: transform, opacity; /* Tối ưu hiệu năng render */
+}
+
+@keyframes esp_dot_animation {
+  0%, 100% {
+    opacity: 0.2;
+    transform: rotate(calc(var(--i) * 30deg)) translateY(-35px) scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(calc(var(--i) * 30deg)) translateY(-35px) scale(1.2);
+  }
+}
+
+.esp_loader_label {
+  margin-top: 24px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}

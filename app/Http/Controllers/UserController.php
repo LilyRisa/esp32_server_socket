@@ -11,6 +11,9 @@ class UserController extends Controller
 {
     public function login()
     {
+        if(Auth::check()){
+            return redirect()->route('dashboard');
+        }
         return view('login');
     }
     public function fetch_login(Request $req)
@@ -29,6 +32,11 @@ class UserController extends Controller
             'success' => false,
             'message' => 'Email hoặc mật khẩu không đúng.'
         ]);
+    }
+    public function account()
+    {
+        $user = Auth::user();
+        return view('user.account', ['user' => $user]);
     }
     public function register(Request $req)
     {

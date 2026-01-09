@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\DeviceController;
+use App\Http\Controllers\API\DspController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +32,26 @@ Route::post('/user/register', [App\Http\Controllers\API\UserController::class, '
 
 Route::middleware(['auth:sanctum', 'token.version'])->group(function () {
     Route::get('/me', [App\Http\Controllers\API\UserController::class, 'me']);
+    Route::post('/logout', [UserController::class, 'logout']);
+
+    Route::put('/account/change-password', [UserController::class, 'updatePassword']);
+    Route::put('/account/change-name', [UserController::class, 'updateName']);
+
+    // Devices
+    Route::get('/devices', [DeviceController::class, 'index']);
+    Route::get('/devices/dsp', [DeviceController::class, 'dsp']);
+
+     // DSP
+    Route::post('/dsp/save', [DspController::class, 'save']);
+    Route::get('/dsp/presets/{deviceId}', [DspController::class, 'getPresetsByDevice']);
+    Route::get('/dsp/preset/{presetId}', [DspController::class, 'getPresetDetail']);
+
+    Route::post('/dsp/stream', [DspController::class, 'streamDsp']);
+
     Route::get('/device/list', [App\Http\Controllers\API\DeviceController::class, 'list']);
+});
+
+Route::prefix('auth')->group(function () {
+    Route::post('/login', [UserController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register']);
 });
